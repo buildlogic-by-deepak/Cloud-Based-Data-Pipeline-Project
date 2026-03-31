@@ -1,0 +1,19 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::deepak-crypto-raw-data-2026-001",
+        "arn:aws:s3:::deepak-crypto-raw-data-2026-001/*",
+        "arn:aws:s3:::deepak-crypto-processed-data-2026-001",
+        "arn:aws:s3:::deepak-crypto-processed-data-2026-001/*"
+      ]
+    }
+  ]
+}
