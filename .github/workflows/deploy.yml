@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - master
 
 jobs:
   validate-and-deploy:
@@ -43,24 +42,3 @@ jobs:
       - name: Terraform Plan
         working-directory: infra/terraform
         run: terraform plan
-
-      - name: Install Lambda Dependencies
-        working-directory: ingestion/lambda
-        run: |
-          mkdir -p package
-          pip install -r requirements.txt -t package
-          cp lambda_function.py package/
-          cd package
-          zip -r lambda_function.zip .
-
-      - name: Upload Lambda Code
-        working-directory: ingestion/lambda/package
-        run: |
-          aws lambda update-function-code \
-            --function-name crypto-data-ingestion \
-            --zip-file fileb://lambda_function.zip
-
-      - name: Upload Glue Script
-        run: |
-          aws s3 cp transformation/glue/glue_job.py \
-          s3://deepak-crypto-raw-data-2026-001/scripts/glue_job.py
